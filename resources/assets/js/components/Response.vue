@@ -118,7 +118,7 @@
 	    },
 	    methods: {
 	    	fetchResponseList: function() {
-	    		this.$http.get('api/response/0').then(function (response) {
+	    		this.$root.$http.get('api/response/0').then(function (response) {
 	    			this.list = response.data;
 	    			$(".loading").fadeOut("slow");
 	    		});
@@ -127,7 +127,7 @@
 	    	createResponse: function () {
 	    		let post = this.post;
 	    		//$(".loading").fadeIn("slow");
-	    		this.$http.post('api/response/new', this.response).then(function (response) {
+	    		this.$root.$http.post('api/response/new', this.response).then(function (response) {
 	    			$('#responseInput')[0].reset();
 	    			this.$set('errors', '');
 
@@ -144,7 +144,7 @@
 
 	    	showResponse: function(id) {
 	    		$(".loading").fadeIn("slow");
-	    		this.$http.get('api/response/'+id).then(function(response) {
+	    		this.$root.$http.get('api/response/'+id).then(function(response) {
 	    			for(var obj_key in response.data[0])
 	    				this.response[obj_key] = response.data[0][obj_key]
 	    			if(response.data[0].is_active){
@@ -161,7 +161,7 @@
 
 	    	updateResponse: function(id) {
 	    		$(".loading").fadeIn("slow");
-	    		this.$http.patch('api/response/'+id, this.response).then(function (response) {
+	    		this.$root.$http.patch('api/response/'+id, this.response).then(function (response) {
 	    			$('#responseInput')[0].reset();
 	    			this.edit = false
 	    			$(".loading").fadeOut("slow");
@@ -174,7 +174,7 @@
 
 	    	deleteResponse: function (id) {
 	    		$(".loading").fadeIn("slow");
-	    		this.$http.delete('api/response/delete/'+id).then(function (response) {
+	    		this.$root.$http.delete('api/response/delete/'+id).then(function (response) {
 	    			if(response.data){
 	    				this.fetchResponseList()
 	    			}

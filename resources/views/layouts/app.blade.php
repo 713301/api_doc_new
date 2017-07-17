@@ -11,7 +11,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{url('vendor/json_beautifier/beautify-json.css')}}">
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.3.4"></script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -87,7 +87,6 @@
     </div>
 </div>
 <script type="text/javascript" src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{url('vendor/json_beautifier/jquery.beautify-json.js')}}"></script>
 <script>window.Laravel = { csrfToken: '{{ csrf_token() }}' };</script>
 <script type="text/javascript" src="{{asset('vendor/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
@@ -108,15 +107,6 @@
             $('a[aria-expanded=true]').attr('aria-expanded', 'false');
         });
 
-        $('.json-container').beautifyJSON({
-            type: "plain",
-    // highlight JSON on mouse hover
-    hoverable: true,
-    // make nested nodes collapsible
-    collapsible: true,
-    // enable colors
-    color: true
-});
     });
 </script>
 </body>

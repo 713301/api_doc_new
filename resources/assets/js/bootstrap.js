@@ -14,9 +14,10 @@ window._ = require('lodash');
  * using reactive data binding and reusable components. Vue's API is clean
  * and simple, leaving you to focus on building your next great project.
  */
-
 window.Vue = require('vue');
+var VueResource = require('vue-resource');
 require('vue-resource');
+Vue.use(VueResource);
 
 /**
  * We'll register a HTTP interceptor to attach the "CSRF" header to each of

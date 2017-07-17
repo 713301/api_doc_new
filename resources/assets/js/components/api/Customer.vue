@@ -67,7 +67,7 @@
 		methods: {
 			
 			fetchAPIList: function() {
-				this.$http.get('api/list/category/customer').then(function (response) {
+				this.$root.$http.get('api/list/category/customer').then(function (response) {
 					this.list = response.data;
 					//console.log(this.list);
 					$(".loading").fadeOut("slow");

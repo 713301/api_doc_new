@@ -6,6 +6,7 @@
 
 require('./bootstrap');
 
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the body of the page. From here, you may begin adding components to
@@ -20,4 +21,14 @@ require('./routes');
 
 const app = new Vue({
     el: '#app',
+    router: router,
+  render: h => h('router-view')
 });
+import Vue from 'vue';
+import VueResource from 'vue-resource';
+Vue.use(VueResource);
+sync(store, router)
+new Vue({
+  router,
+  store
+}).$mount('#app');

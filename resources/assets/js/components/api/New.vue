@@ -45,36 +45,36 @@
 
 				<div class="form-group">
 					<label for="name">API Name</label>
-					<input v-model="response.api_name" v-el:apiInput type="text" name="api_name" class="form-control">
+					<input v-model="response.api_name" v-el:api-input type="text" name="api_name" class="form-control">
 				</div>
 
 				<div class="form-group">
 					<label for="description">API Description</label>
-					<textarea v-model="response.description" v-el:apiInput name="description" class="form-control"></textarea>
+					<textarea v-model="response.description" v-el:api-input name="description" class="form-control"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="api_uri">API URI</label>
-					<input v-model="response.api_uri" v-el:apiInput type="text" name="api_uri" class="form-control">
+					<input v-model="response.api_uri" v-el:api-input type="text" name="api_uri" class="form-control">
 				</div>
 
 				<div class="form-group">
 					<label for="parameters">API Paremeters</label>
-					<textarea v-model="response.parameters" v-el:apiInput name="paremeters" class="form-control"></textarea>
+					<textarea v-model="response.parameters" v-el:api-input name="paremeters" class="form-control"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="success_response">Success Response </label>
-					<textarea v-model="response.success_response" v-el:apiInput name="success_response" class="form-control"></textarea>
+					<textarea v-model="response.success_response" v-el:api-input name="success_response" class="form-control"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="error_response">Failure Response </label>
-					<textarea v-model="response.error_response" v-el:apiInput name="error_response" class="form-control"></textarea>
+					<textarea v-model="response.error_response" v-el:api-input name="error_response" class="form-control"></textarea>
 				</div>
 
 				<div class="form-group">
 					<label for="validations">API Validations(if any)</label>
-					<textarea v-model="response.validations" v-el:apiInput name="validations" class="form-control"></textarea>
+					<textarea v-model="response.validations" v-el:api-input name="validations" class="form-control"></textarea>
 				</div>
 
 				<div class="form-group">
@@ -94,6 +94,7 @@
 	</div>
 </template>
 <script>
+	import VueResource from 'vue-resource';
 	import Sidebar from '../Sidepanel.vue';
 	export default {
 		components: {
@@ -125,7 +126,7 @@
 				var itemId = this.$route.params.resource_id;
 				if(itemId){
 					// $(".loading").fadeIn("slow");
-					this.$http.get('api/list/'+this.$route.params.resource_id).then(function(response) {
+					this.$root.$http.get('api/list/'+this.$route.params.resource_id).then(function(response) {
 						console.log(response.data[0]);
 						for(var obj_key in response.data[0])
 							this.response[obj_key] = response.data[0][obj_key]
@@ -147,12 +148,12 @@
 
 				createApi: function () {
 					$(".loading").fadeIn("slow");
-					this.$http.get('login/check').then(function (response) {
+					this.$root.$http.get('login/check').then(function (response) {
 	    				if(response.status == 200 && (response.data))
 	    				this.authenticated = true;
 	    				if(this.authenticated) {
 	    					this.response.created_by = response.data.id;
-							this.$http.post('api/new', this.response).then(function (response) {
+							this.$root.$http.post('api/new', this.response).then(function (response) {
 								$('#apiInput')[0].reset();
 								this.$route.router.go({name: 'list-api'});
 							}, function(response) {
@@ -169,7 +170,7 @@
 				/*to update the existing api list*/
 				updateApi: function(id) {
 					$(".loading").fadeIn("slow");
-					this.$http.patch('api/list/'+id, this.response).then(function (response) {
+					this.$root.$http.patch('api/list/'+id, this.response).then(function (response) {
 						$('#apiInput')[0].reset();
 						this.edit = false
 						$(".loading").fadeOut("slow");
